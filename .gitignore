@@ -58,7 +58,7 @@ rat-results.txt
 *.js.map
 node_modules
 npm-debug.log*
-superset/static/assets
+#superset/static/assets
 superset/static/version_info.json
 yarn-error.log
 

@@ -42,16 +42,20 @@ export default function TableCollection({
         {headerGroups.map(headerGroup => (
           <tr {...headerGroup.getHeaderGroupProps()}>
             {headerGroup.headers.map(column =>
+              //@ts-ignore
               column.hidden ? null : (
                 <th
                   {...column.getHeaderProps(
+                    //@ts-ignore
                     column.sortable ? column.getSortByToggleProps() : {},
                   )}
                   data-test="sort-header"
                 >
                   {column.render('Header')}
                   {'  '}
-                  {column.sortable && (
+                  {
+                    //@ts-ignore
+                  column.sortable && (
                     <i
                       className={cx('text-primary fa', {
                         'fa-sort': !column.isSorted,
@@ -80,8 +84,10 @@ export default function TableCollection({
               }
             >
               {row.cells.map(cell => {
+                //@ts-ignore
                 if (cell.column.hidden) return null;
 
+                //@ts-ignore
                 const columnCellProps = cell.column.cellProps || {};
 
                 return (

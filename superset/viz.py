@@ -49,7 +49,7 @@ from superset import app, cache, get_manifest_files, security_manager
 from superset.constants import NULL_STRING
 from superset.exceptions import NullValueException, SpatialException
 from superset.models.helpers import QueryResult
-from superset.typing import VizData
+from superset.typing1 import VizData
 from superset.utils import core as utils
 from superset.utils.core import (
     DTTM_ALIAS,

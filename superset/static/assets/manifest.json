@@ -1,0 +1,93 @@
+{
+  "app": "superset",
+  "entrypoints": {
+    "theme": {
+      "css": [
+        "/static/assets/theme.a1e51ceba3065dbc5ef3.entry.css"
+      ],
+      "js": [
+        "/static/assets/theme.a1e51ceba3065dbc5ef3.entry.js"
+      ]
+    },
+    "preamble": {
+      "css": [],
+      "js": [
+        "/static/assets/vendors-major.638bba6a1760f8748fa6.chunk.js",
+        "/static/assets/vendors-addSlice-preamble-profile-showSavedQuery-sqllab-welcome.3356dd242e77c1d7f59e.chunk.js",
+        "/static/assets/preamble.3b85c2220893372c8506.entry.js"
+      ]
+    },
+    "addSlice": {
+      "css": [
+        "/static/assets/addSlice.178d03f5d8dc0eb04ad7.entry.css"
+      ],
+      "js": [
+        "/static/assets/vendors-major.638bba6a1760f8748fa6.chunk.js",
+        "/static/assets/vendors-addSlice-preamble-profile-showSavedQuery-sqllab-welcome.3356dd242e77c1d7f59e.chunk.js",
+        "/static/assets/addSlice.178d03f5d8dc0eb04ad7.entry.js"
+      ]
+    },
+    "explore": {
+      "css": [
+        "/static/assets/5.bdb1306cb40926cdea03.chunk.css",
+        "/static/assets/explore.6a3f523cb47688658472.entry.css"
+      ],
+      "js": [
+        "/static/assets/vendors-major.638bba6a1760f8748fa6.chunk.js",
+        "/static/assets/5.bdb1306cb40926cdea03.chunk.js",
+        "/static/assets/explore.6a3f523cb47688658472.entry.js"
+      ]
+    },
+    "dashboard": {
+      "css": [
+        "/static/assets/5.bdb1306cb40926cdea03.chunk.css",
+        "/static/assets/dashboard.aff84319e94f5bbc9c0c.entry.css"
+      ],
+      "js": [
+        "/static/assets/vendors-major.638bba6a1760f8748fa6.chunk.js",
+        "/static/assets/5.bdb1306cb40926cdea03.chunk.js",
+        "/static/assets/dashboard.aff84319e94f5bbc9c0c.entry.js"
+      ]
+    },
+    "sqllab": {
+      "css": [
+        "/static/assets/sqllab.755852020751a08f736a.entry.css"
+      ],
+      "js": [
+        "/static/assets/vendors-major.638bba6a1760f8748fa6.chunk.js",
+        "/static/assets/vendors-addSlice-preamble-profile-showSavedQuery-sqllab-welcome.3356dd242e77c1d7f59e.chunk.js",
+        "/static/assets/sqllab.755852020751a08f736a.entry.js"
+      ]
+    },
+    "welcome": {
+      "css": [
+        "/static/assets/welcome.872825910bc9a7fbc694.entry.css"
+      ],
+      "js": [
+        "/static/assets/vendors-major.638bba6a1760f8748fa6.chunk.js",
+        "/static/assets/vendors-addSlice-preamble-profile-showSavedQuery-sqllab-welcome.3356dd242e77c1d7f59e.chunk.js",
+        "/static/assets/welcome.872825910bc9a7fbc694.entry.js"
+      ]
+    },
+    "profile": {
+      "css": [
+        "/static/assets/profile.b6ef30408975acc70f43.entry.css"
+      ],
+      "js": [
+        "/static/assets/vendors-major.638bba6a1760f8748fa6.chunk.js",
+        "/static/assets/vendors-addSlice-preamble-profile-showSavedQuery-sqllab-welcome.3356dd242e77c1d7f59e.chunk.js",
+        "/static/assets/profile.b6ef30408975acc70f43.entry.js"
+      ]
+    },
+    "showSavedQuery": {
+      "css": [
+        "/static/assets/showSavedQuery.58a594d7415d460636cc.entry.css"
+      ],
+      "js": [
+        "/static/assets/vendors-major.638bba6a1760f8748fa6.chunk.js",
+        "/static/assets/vendors-addSlice-preamble-profile-showSavedQuery-sqllab-welcome.3356dd242e77c1d7f59e.chunk.js",
+        "/static/assets/showSavedQuery.58a594d7415d460636cc.entry.js"
+      ]
+    }
+  }
+}

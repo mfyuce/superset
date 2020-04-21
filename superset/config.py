@@ -35,7 +35,7 @@ from dateutil import tz
 from flask_appbuilder.security.manager import AUTH_DB
 
 from superset.stats_logger import DummyStatsLogger
-from superset.typing import CacheConfig
+from superset.typing1 import CacheConfig
 from superset.utils.log import DBEventLogger
 from superset.utils.logging_configurator import DefaultLoggingConfigurator
 
