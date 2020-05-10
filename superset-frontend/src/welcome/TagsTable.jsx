@@ -24,6 +24,7 @@ import { t } from '@superset-ui/translation';
 
 import { fetchObjects } from '../tags';
 import Loading from '../components/Loading';
+// import '../../stylesheets/reactable-pagination.css';
 
 const propTypes = {
   search: PropTypes.string,

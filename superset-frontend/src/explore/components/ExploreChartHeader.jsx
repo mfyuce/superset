@@ -22,6 +22,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { t } from '@superset-ui/translation';
 
+import { isFeatureEnabled, FeatureFlag } from 'src/featureFlags';
 import { chartPropShape } from '../../dashboard/util/propShapes';
 import ExploreActionButtons from './ExploreActionButtons';
 import RowCountLabel from './RowCountLabel';
@@ -33,6 +34,14 @@ import Timer from '../../components/Timer';
 import CachedLabel from '../../components/CachedLabel';
 import PropertiesModal from './PropertiesModal';
 import { sliceUpdated } from '../actions/exploreActions';
+import ObjectTags from '../../components/ObjectTags';
+import {
+    addTag,
+    deleteTag,
+    fetchSuggestions,
+    fetchTags,
+    OBJECT_TYPES,
+} from '../../tags';
 
 const CHART_STATUS_MAP = {
   failed: 'danger',
@@ -56,6 +65,23 @@ const propTypes = {
 export class ExploreChartHeader extends React.PureComponent {
   constructor(props) {
     super(props);
+      this.fetchTags = fetchTags.bind(this, {
+          objectType: OBJECT_TYPES.CHART,
+          objectId: props.chart.id,
+          includeTypes: false,
+      });
+      this.fetchSuggestions = fetchSuggestions.bind(this, {
+          includeTypes: false,
+      });
+      this.deleteTag = deleteTag.bind(this, {
+          objectType: OBJECT_TYPES.CHART,
+          objectId: props.chart.id,
+      });
+      this.addTag = addTag.bind(this, {
+          objectType: OBJECT_TYPES.CHART,
+          objectId: props.chart.id,
+          includeTypes: false,
+      });
     this.state = {
       isPropertiesModalOpen: false,
     };
@@ -183,6 +209,15 @@ export class ExploreChartHeader extends React.PureComponent {
             currentFormData={formData}
           />
         )}
+          {isFeatureEnabled(FeatureFlag.TAGGING_SYSTEM) &&
+          <ObjectTags
+                  fetchTags={this.fetchTags}
+                  fetchSuggestions={this.fetchSuggestions}
+                  deleteTag={this.deleteTag}
+                  addTag={this.addTag}
+                  editable={this.props.can_overwrite}
+          />
+          }
         <div className="pull-right">
           {chartFinished && queryResponse && (
             <RowCountLabel

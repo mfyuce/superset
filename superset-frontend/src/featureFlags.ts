@@ -20,6 +20,7 @@
 // check into source control. We're hardcoding the supported flags for now.
 export enum FeatureFlag {
   OMNIBAR = 'OMNIBAR',
+  TAGGING_SYSTEM = 'TAGGING_SYSTEM',
   CLIENT_CACHE = 'CLIENT_CACHE',
   SCHEDULED_QUERIES = 'SCHEDULED_QUERIES',
   SQL_VALIDATORS_BY_ENGINE = 'SQL_VALIDATORS_BY_ENGINE',

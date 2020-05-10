@@ -22,13 +22,22 @@ import PropTypes from 'prop-types';
 import { CategoricalColorNamespace } from '@superset-ui/color';
 import { t } from '@superset-ui/translation';
 
+import { isFeatureEnabled, FeatureFlag } from 'src/featureFlags';
 import HeaderActionsDropdown from './HeaderActionsDropdown';
 import EditableTitle from '../../components/EditableTitle';
 import Button from '../../components/Button';
 import FaveStar from '../../components/FaveStar';
+import ObjectTags from '../../components/ObjectTags';
 import FilterScopeModal from './filterscope/FilterScopeModal';
 import PublishedStatus from './PublishedStatus';
 import UndoRedoKeylisteners from './UndoRedoKeylisteners';
+import {
+  addTag,
+  deleteTag,
+  fetchSuggestions,
+  fetchTags,
+  OBJECT_TYPES,
+} from '../../tags';
 
 import { chartPropShape } from '../util/propShapes';
 import {
@@ -122,6 +131,24 @@ class Header extends React.PureComponent {
     this.overwriteDashboard = this.overwriteDashboard.bind(this);
     this.showPropertiesModal = this.showPropertiesModal.bind(this);
     this.hidePropertiesModal = this.hidePropertiesModal.bind(this);
+
+      this.fetchTags = fetchTags.bind(this, {
+          objectType: OBJECT_TYPES.DASHBOARD,
+          objectId: props.dashboardInfo.id,
+          includeTypes: false,
+      });
+      this.fetchSuggestions = fetchSuggestions.bind(this, {
+          includeTypes: false,
+      });
+      this.deleteTag = deleteTag.bind(this, {
+          objectType: OBJECT_TYPES.DASHBOARD,
+          objectId: props.dashboardInfo.id,
+      });
+      this.addTag = addTag.bind(this, {
+          objectType: OBJECT_TYPES.DASHBOARD,
+          objectId: props.dashboardInfo.id,
+          includeTypes: false,
+      });
   }
 
   componentDidMount() {
@@ -353,6 +380,15 @@ class Header extends React.PureComponent {
               />
             </span>
           )}
+          {isFeatureEnabled(FeatureFlag.TAGGING_SYSTEM) && (
+              <ObjectTags
+              fetchTags={this.fetchTags}
+              fetchSuggestions={this.fetchSuggestions}
+              deleteTag={this.deleteTag}
+              addTag={this.addTag}
+              editable={dashboardInfo.dash_edit_perm}
+              />
+              )}
         </div>
 
         <div className="button-container">

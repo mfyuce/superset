@@ -16,14 +16,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
 import { Panel, Row, Col, Tabs, Tab, FormControl } from 'react-bootstrap';
 import { t } from '@superset-ui/translation';
 import { useQueryParam, StringParam } from 'use-query-params';
+import { isFeatureEnabled, FeatureFlag } from 'src/featureFlags';
 import RecentActivity from '../profile/components/RecentActivity';
 import Favorites from '../profile/components/Favorites';
 import DashboardTable from './DashboardTable';
+import SelectControl from '../explore/components/controls/SelectControl';
+import TagsTable from './TagsTable';
+import { fetchSuggestions } from '../tags';
+import { STANDARD_TAGS } from '../utils/tags';
 
 const propTypes = {
   user: PropTypes.object.isRequired,
@@ -41,8 +46,11 @@ function useSyncQueryState(queryParam, queryParamType, defaultState) {
   return [state, setQueryStateAndState];
 }
 
+
+
 export default function Welcome({ user }) {
-  const [activeTab, setActiveTab] = useSyncQueryState(
+
+    const [activeTab, setActiveTab] = useSyncQueryState(
     'activeTab',
     StringParam,
     'all',
@@ -54,13 +62,52 @@ export default function Welcome({ user }) {
     '',
   );
 
-  return (
+    const [tagsQuery, setTagsQuery] = useSyncQueryState(
+            'tags',
+            StringParam,
+            'owner:{{ current_user_id() }}',
+    );
+    const [state, setState] = useState({tagSuggestions: STANDARD_TAGS});
+
+    useEffect(()=>{
+        fetchSuggestions({ includeTypes: false }, (suggestions) => {
+            const tagSuggestions = [
+                ...STANDARD_TAGS,
+                ...suggestions.map(tag => tag.name),
+            ];
+            setState({ tagSuggestions });
+        });
+    },[tagsQuery]);
+    return (
     <div className="container welcome">
       <Tabs
         activeKey={activeTab}
         onSelect={setActiveTab}
         id="uncontrolled-tab-example"
       >
+
+          {isFeatureEnabled(FeatureFlag.TAGGING_SYSTEM) &&
+          <Tab eventKey="tags" title={t('Tags')}>
+              <Panel>
+                  <Row>
+                      <Col md={8}><h2>{t('Tags')}</h2></Col>
+                  </Row>
+                  <Row>
+                      <Col md={12}>
+                          <SelectControl
+                                  name="tags"
+                                  value={tagsQuery.split(',')}
+                                  multi
+                                  onChange={e => setTagsQuery(e.currentTarget.value)}
+                                  choices={state.tagSuggestions}
+                          />
+                      </Col>
+                  </Row>
+                  <hr />
+                  <TagsTable search={tagsQuery} />
+              </Panel>
+          </Tab>
+          }
         <Tab eventKey="all" title={t('Dashboards')}>
           <Panel>
             <Panel.Body>

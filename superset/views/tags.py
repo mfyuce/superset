@@ -30,7 +30,7 @@ from superset.models.slice import Slice
 from superset.models.sql_lab import SavedQuery
 from superset.models.tags import ObjectTypes, Tag, TaggedObject, TagTypes
 
-from .base import BaseSupersetView, json_success
+from .base import   BaseSupersetView, json_success
 
 
 def process_template(content):
@@ -57,6 +57,7 @@ class TagView(BaseSupersetView):
         )
         tags = [{"id": id, "name": name} for id, name in query]
         return json_success(json.dumps(tags))
+
 
     @has_access_api
     @expose("/tags/<object_type:object_type>/<int:object_id>/", methods=["GET"])

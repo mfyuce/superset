@@ -26,7 +26,7 @@ import {
   initFeatureFlags,
   isFeatureEnabled,
   FeatureFlag,
-} from 'src/featureFlags';
+} from '../featureFlags';
 import getInitialState from './reducers/getInitialState';
 import rootReducer from './reducers/index';
 import { initEnhancer } from '../reduxUtils';

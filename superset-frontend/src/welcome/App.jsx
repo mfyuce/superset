@@ -25,9 +25,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { QueryParamProvider } from 'use-query-params';
 import { ThemeProvider } from 'emotion-theming';
 
-import { initFeatureFlags } from 'src/featureFlags';
+import {
+    initFeatureFlags
+} from '../featureFlags';
 import { supersetTheme } from '@superset-ui/style';
 import ErrorBoundary from 'src/components/ErrorBoundary';
+
+
 import Menu from 'src/components/Menu/Menu';
 import FlashProvider from 'src/components/FlashProvider';
 import DashboardList from 'src/views/dashboardList/DashboardList';
@@ -46,6 +50,7 @@ setupPlugins();
 
 const container = document.getElementById('app');
 const bootstrap = JSON.parse(container.getAttribute('data-bootstrap'));
+initFeatureFlags(bootstrap.common.feature_flags);
 const user = { ...bootstrap.user };
 const menu = { ...bootstrap.common.menu_data };
 const common = { ...bootstrap.common };

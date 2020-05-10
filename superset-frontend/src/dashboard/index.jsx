@@ -20,7 +20,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
 import { createStore, applyMiddleware, compose } from 'redux';
-import { initFeatureFlags } from 'src/featureFlags';
+import { initFeatureFlags } from '../featureFlags';
 import { initEnhancer } from '../reduxUtils';
 import getInitialState from './reducers/getInitialState';
 import rootReducer from './reducers/index';
