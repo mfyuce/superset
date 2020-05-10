@@ -30,7 +30,7 @@ from superset.models.slice import Slice
 from superset.models.sql_lab import SavedQuery
 from superset.models.tags import ObjectTypes, Tag, TaggedObject, TagTypes
 
-from .base import   BaseSupersetView, json_success
+from .base import BaseSupersetView, json_success
 
 
 def process_template(content):
@@ -49,15 +49,14 @@ class TagView(BaseSupersetView):
     def suggestions(self):  # pylint: disable=no-self-use
         query = (
             db.session.query(TaggedObject)
-            .join(Tag)
-            .with_entities(TaggedObject.tag_id, Tag.name)
-            .group_by(TaggedObject.tag_id, Tag.name)
-            .order_by(func.count().desc())
-            .all()
+                .join(Tag)
+                .with_entities(TaggedObject.tag_id, Tag.name)
+                .group_by(TaggedObject.tag_id, Tag.name)
+                .order_by(func.count().desc())
+                .all()
         )
         tags = [{"id": id, "name": name} for id, name in query]
         return json_success(json.dumps(tags))
-
 
     @has_access_api
     @expose("/tags/<object_type:object_type>/<int:object_id>/", methods=["GET"])
@@ -142,15 +141,15 @@ class TagView(BaseSupersetView):
         if not types or "dashboard" in types:
             dashboards = (
                 db.session.query(Dashboard)
-                .join(
+                    .join(
                     TaggedObject,
                     and_(
                         TaggedObject.object_id == Dashboard.id,
                         TaggedObject.object_type == ObjectTypes.dashboard,
                     ),
                 )
-                .join(Tag, TaggedObject.tag_id == Tag.id)
-                .filter(Tag.name.in_(tags))
+                    .join(Tag, TaggedObject.tag_id == Tag.id)
+                    .filter(Tag.name.in_(tags))
             )
             results.extend(
                 {
@@ -169,15 +168,15 @@ class TagView(BaseSupersetView):
         if not types or "chart" in types:
             charts = (
                 db.session.query(Slice)
-                .join(
+                    .join(
                     TaggedObject,
                     and_(
                         TaggedObject.object_id == Slice.id,
                         TaggedObject.object_type == ObjectTypes.chart,
                     ),
                 )
-                .join(Tag, TaggedObject.tag_id == Tag.id)
-                .filter(Tag.name.in_(tags))
+                    .join(Tag, TaggedObject.tag_id == Tag.id)
+                    .filter(Tag.name.in_(tags))
             )
             results.extend(
                 {
@@ -196,15 +195,15 @@ class TagView(BaseSupersetView):
         if not types or "query" in types:
             saved_queries = (
                 db.session.query(SavedQuery)
-                .join(
+                    .join(
                     TaggedObject,
                     and_(
                         TaggedObject.object_id == SavedQuery.id,
                         TaggedObject.object_type == ObjectTypes.query,
                     ),
                 )
-                .join(Tag, TaggedObject.tag_id == Tag.id)
-                .filter(Tag.name.in_(tags))
+                    .join(Tag, TaggedObject.tag_id == Tag.id)
+                    .filter(Tag.name.in_(tags))
             )
             results.extend(
                 {
