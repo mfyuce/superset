@@ -98,7 +98,7 @@ export default function Welcome({ user }) {
                                   name="tags"
                                   value={tagsQuery.split(',')}
                                   multi
-                                  onChange={e => setTagsQuery(e.currentTarget.value)}
+                                  onChange={e => setTagsQuery(e.join())}
                                   choices={state.tagSuggestions}
                           />
                       </Col>
